@@ -10,6 +10,7 @@ class ShoppingListApplication {
     public static void main(String[] args) {
         Map<Long, Product> productRepository = new HashMap<>();
         Long productIdSequence = 0L;
+        Validation valid = new Validation();
         while (true) {
             Scanner scanner = new Scanner(System.in);
             try {
@@ -25,6 +26,7 @@ class ShoppingListApplication {
                         BigDecimal price = new BigDecimal(scanner.nextLine());
                         Product product = new Product();
                         product.setName(name);
+                        valid.isValid(product);
                         product.setPrice(price);
                         product.setId(productIdSequence);
                         productRepository.put(productIdSequence, product);
