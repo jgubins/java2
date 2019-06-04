@@ -3,6 +3,7 @@ package com.javaguru.shoppinglist.console;
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.service.ProductService;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -39,12 +40,21 @@ private void createProduct() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Enter product name: ");
     String name = scanner.nextLine();
+    System.out.println("Enter product price: ");
+    BigDecimal price = new BigDecimal(scanner.nextLine());
+    System.out.println("Enter product discount: ");
+    BigDecimal discount = new BigDecimal(scanner.nextLine());
     System.out.println("Enter product description: ");
     String description = scanner.nextLine();
 
     Product product = new Product();
     product.setName(name);
+    product.setPrice(price);
+    product.setDiscount(discount);
+    product.actualPrice();
     product.setDescription(description);
+
+
 
 
     Long id = productService.createProduct(product);
