@@ -10,7 +10,7 @@ MathContext mc = new MathContext(4);
     private String name;
     private BigDecimal price;
     private String description;
-    private BigDecimal discount;
+    private BigDecimal discount;//
 
 
 
