@@ -1,35 +1,15 @@
 package com.javaguru.shoppinglist;
 
+import Config.AppConfig;
 import com.javaguru.shoppinglist.console.ConsoleUI;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-import com.javaguru.shoppinglist.service.ProductService;
-import com.javaguru.shoppinglist.service.Validation.*;
-
-import java.math.BigDecimal;
-import java.util.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class ShoppingListApplication {
-
-
-
+    
 public static void main(String[] args) {
-    ProductInMemoryRepository repository = new ProductInMemoryRepository();
-
-    ProductValidationRule productNameValidationRule = new ProductNameValidationRule();
-    ProductDiscountValidationRule productDiscountValidationRule = new ProductDiscountValidationRule();
-    ProductPriceDiscountValidationRule productPriceDiscountValidationRule = new ProductPriceDiscountValidationRule();
-    ProductValidationRule productUniqueNameValidationRule = new ProductUniqueNameValidationRule(repository);
-    Set<ProductValidationRule> rules = new HashSet<>();
-    rules.add(productNameValidationRule);
-    rules.add(productDiscountValidationRule);
-    rules.add(productPriceDiscountValidationRule);
-    rules.add(productUniqueNameValidationRule);
-
-    ProductValidationService validationService = new ProductValidationService(rules);
-
-    ProductService productService = new ProductService(repository, validationService);
-
-    ConsoleUI consoleUI = new ConsoleUI(productService);
-    consoleUI.execute();
+    ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+    ConsoleUI console = context.getBean(ConsoleUI.class);
+    console.execute();
 }
 }
